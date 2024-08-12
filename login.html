@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Login</title>
+	<style type="text/css">
+	*{padding: 0;margin: 0;box-sizing: border-box;}
+
+	header{
+	height: 10vh;
+	background-color: rgba(0,0,0,0.10);
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+}
+ul{
+	display: flex;
+	justify-content: space-around;
+}
+a{
+	text-decoration: none;
+}
+li{
+	list-style: none;
+}
+nav{
+	width: 50%;
+}
+#heading{
+	height: 150px;
+	width: 150px;
+}
+#url{
+	width: 100%;
+}
+main{
+	height: 90vh;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-image: url(photos/login.jpg);
+	background-size: 100% 100%;
+
+
+}
+.login_card{
+	height: 80vh;
+	width: 30%;
+	background-color: rgba(0,0,0,0.5);
+	display: flex;
+	flex-direction: column;
+}
+.login_heading{
+	display: flex;
+	justify-content: space-around;
+	padding-top: 20px;
+}
+.login_heading h1{
+	font-size: 1.5rem;
+	border-bottom: 2px solid red;
+	color: white;
+}
+.login_main{
+	color: white;
+	margin-top: 100px;
+	padding: 50px;
+
+}
+input{
+	border: none;
+	border-bottom: 2px solid white;
+	background: transparent;
+	font-size: 1rem;
+
+}
+input,#submit{
+	height: 40px;
+	width: 100%;
+	color: white;
+	margin-top: 20px;
+	margin-bottom: 10px;
+
+}
+#submit{
+	background-color: #e76c7c;
+	border: none;
+	padding: 5px;
+	font-weight: 1000;
+	margin-bottom: 20px;
+}
+.login_main a{
+	color: white;
+}
+</style>
+</head>
+<body>
+	<header>
+			<a href="index.html"><img id="heading" src="photos/logo.png"></a>
+			<nav>
+				<ul>
+					<a href="index.html">Home</a>
+					<a href="#">About Us</a>
+					<a href="#">Contact Me</a>
+					<a href="#">Help</a>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<div class="login_card">
+				<div class="login_heading">
+				<h1>Login</h1>
+				<h2>Register</h1>
+			</div>
+			<form onsubmit="return login()" class="login_main">
+				<label>Username</label><br>
+				<input id="Username" type="text" name="" autocomplete="off"><br>
+				<label>Password</label><br>
+				<input id="Password" type="Password" name="" autocomplete="off"><br>
+				<input id="submit" type="submit" name="" value="Login"><br>
+				<a href="">Forget Password</a>
+			</form>
+		</main>
+
+	<script type="text/javascript">
+		const Username = document.getElementById('Username');
+		const Password = document.getElementById('Password');
+
+		function login(){
+			if(Username.value == ""){
+				alert("Please Enter Your Username");
+				return false;
+			}
+			if(Username.value.length <3){
+				alert("Username Must Be Greater 3 Charecters");
+				return false;
+			}
+			if(Username.value.length >20){
+				alert("Username Must Be Less 20 Charecters");
+				return false;
+			}
+			if(Password.value == ""){
+				alert("Please Enter Your Password");
+				return false;
+			}
+			if(Password.value.length <5){
+				alert("Password Must Be Greater than 5 Charecters");
+				return false;
+			}
+			if(Password.value.length >25){
+				alert("Password Must Be Less 25 Charecter");
+				return false;
+			}
+			else{
+				alert("User Login Successfully");
+				
+			}
+		}
+
+
+	</script>
+</body>
+</html>

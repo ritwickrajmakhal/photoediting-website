@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Photo Editing App by Ritwick</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<!-- <link rel="stylesheet" type="text/css" href="Global folder/nav.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="Global folder/footer.css"> -->
+</head>
+<body>
+	<div class="Editing_display">
+		<header>
+			<img id="heading" src="photos/logo.png">
+			<nav>
+				<h1 onclick="show_menu()">Menu</h1>
+				<ul>
+					<a href="index.html"><u>Home</u></a>
+					<a href="#">About Us</a>
+					<a href="#">Contact Me</a>
+					<a href="#">Help</a>
+					<a href="login.html">Login</a>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<section class="controls1">
+				<div>
+					<label>Enter Your Image Url:</label>
+					<input type="url" id="url" placeholder="Paste an url">
+					<button id="go" onclick="start()">Go</button>
+					<button disabled id="Calcel" onclick="cancel()">Cancel</button>
+				</div>
+
+				<label>Brightness:</label>
+				<input onchange="changeBrightness()" max="200" disabled type="range" value="0" id="Brightness">
+				<br>
+
+				<label>Contrast:</label>
+				<input onchange="changeContrast()" max="200" disabled type="range" value="0" id="Contrast">
+				<br>
+
+				<label>Blur:</label>
+				<input onchange="changeBlur()" disabled type="range" value="0" id="Blur">
+				<br>
+
+				<label>Grayscale:</label>
+				<input onchange="changeGrayscale()" disabled type="range" value="0" id="Grayscale">
+				<br>
+
+				<button onclick="Shadow()" disabled id="Drop_Shadow">Drop Shadow</button>
+				<div class="Shadow_Area">
+					<label>H-Shadow</label><input id="H-Shadow" type="number" placeholder="H-Shadow" value="10">
+
+					<label>V-Shadow</label><input id="V-Shadow" type="number" placeholder="V-Shadow-Shadow" value="10">
+
+					<label>Blur</label><input id="Shadow_Blur" type="number" placeholder="Blur" value="10">
+
+					<label>Spread</label><input id="Spread" type="number" placeholder="Spread" value="10">
+
+					<label>color</label><input id="color" type="color">
+
+					<button onclick="apply_shadow()">Apply Shadow</button>
+				</div>
+			</section>
+
+			<section class="Edit_Section">
+				<img class="Edit_Area">
+			</section>
+
+			<section class="controls2">
+				
+				<label>Hue-Rotate:</label>
+				<input onchange="changeHue_Rotate()" disabled type="range" value="0" id="Hue-Rotate">
+				<br>
+
+				<label>Invert:</label>
+				<input onchange="changeInvert()" disabled type="range" value="0" id="Invert">
+				<br>
+
+				<label>Opacity:</label>
+				<input onchange="changeOpacity()" disabled type="range" value="0" id="Opacity">
+				<br>
+
+				<label>Saturate:</label>
+				<input onchange="changeSaturate()" disabled type="range" value="0" id="Saturate">
+				<br>
+
+				<label>Sepia:</label>
+				<input onchange="changeSepia()" disabled type="range" value="0" id="Sepia">
+				<br>
+
+				<div>
+				
+				<button disabled id="Reset" onclick="reset()">Reset</button>
+				<button disabled id="Print" onclick="PrintPic()">Print</button>
+				</div>
+			</section>
+		</main>
+		
+	</div>
+
+<script>
+
+function show_menu(){
+	const ul = document.querySelector('ul');
+	ul.style.display = "block";
+
+}
+
+
+const url = document.querySelector('#url');
+const Go = document.querySelector('#Go');
+const Edit_Area = document.querySelector('.Edit_Area');
+const Shadow_Area = document.querySelector('.Shadow_Area');
+const hide = document.querySelector('#hide');
+
+const Brightness = document.querySelector('#Brightness');
+const Contrast = document.querySelector('#Contrast');
+const Blur = document.querySelector('#Blur');
+const Grayscale = document.querySelector('#Grayscale');
+const Drop_Shadow = document.querySelector('#Drop_Shadow');
+
+const H_Shadow  = document.querySelector('#H-Shadow');
+const V_Shadow  = document.querySelector('#V-Shadow');
+const Shadow_Blur  = document.querySelector('#H-Shadow');
+const Spread  = document.querySelector('#Spread');
+const shadow_color = document.querySelector('#color');
+
+const Hue_Rotate = document.querySelector('#Hue-Rotate');
+const Invert = document.querySelector('#Invert');
+const Opacity = document.querySelector('#Opacity');
+const Saturate = document.querySelector('#Saturate');
+const Sepia = document.querySelector('#Sepia');
+const Calcel = document.querySelector('#Calcel');
+const Reset = document.querySelector('#Reset');
+const Print = document.querySelector('#Print');
+
+const setofControls = [Brightness,Contrast,Blur,Grayscale,Drop_Shadow,Hue_Rotate,Invert,Opacity,Saturate,Sepia,Calcel,Reset,Print];
+
+ function start(){
+ 	if(url.value == ""){
+ 		alert("Please enter url of Image");
+ 		Edit_Area.style.filter = "none";
+ 		Edit_Area.setAttribute('src','photos/gallery-icon-galaxy-s6.png');
+ 		for(let i=0;i<=setofControls.length;i++){
+ 			setofControls[i].disabled = true;
+ 		}
+ 	}else{
+ 		url.disabled = true;
+ 		go.disabled = true;
+ 		Edit_Area.setAttribute('src',url.value);
+ 		for(let i=0;i<=setofControls.length;i++){
+ 			setofControls[i].disabled = false;
+ 		} 		
+	}
+}
+function cancel(){
+	Edit_Area.setAttribute('src','photos/gallery-icon-galaxy-s6.png');
+	Edit_Area.style.filter = "none";
+	url.value = "";
+	url.disabled = false;
+ 	go.disabled = false;
+	for(let i=0;i<=setofControls.length;i++){
+ 			setofControls[i].disabled = true;
+ 		}
+}
+function Shadow(){
+ 			if(Drop_Shadow.innerHTML == "Drop Shadow"){
+ 				Drop_Shadow.innerHTML = "Remove Shadow";
+ 				Shadow_Area.style.display = "flex";
+ 				Edit_Area.style.filter = "drop-shadow(8px 8px 10px gray)";
+
+ 				}else{
+ 				Shadow_Area.style.display = "none";
+ 				Edit_Area.style.filter = "drop-shadow(0px 0px 0px white)";
+ 				Drop_Shadow.innerHTML = "Drop Shadow";
+ 				
+ 			}
+ 		}
+
+ function PrintPic(){
+ 	const Edit_Section = document.querySelector('.Edit_Section');
+ 	Edit_Area.style.height = "95vh";
+ 	Edit_Area.style.width = "100%";
+ 	let Backup = document.body.innerHTML;
+ 	let Photocontent = Edit_Section.innerHTML;
+ 	document.body.innerHTML = Photocontent;
+ 	window.print();
+ 	document.body.innerHTML = Backup;
+
+ }
+
+function apply_shadow(){
+	Edit_Area.style.filter = "drop-shadow("+ H_Shadow.value +"px " + V_Shadow.value + "px " + Shadow_Blur.value + "px " + shadow_color.value+")";
+}
+
+ function changeBrightness(){
+ 	Edit_Area.style.filter = "brightness("+Brightness.value+"%)";
+ 	return Brightness.value;
+ }
+function changeContrast(){
+ 	Edit_Area.style.filter = "contrast("+Contrast.value+"%)";
+ 	return Contrast.value;
+ }
+ function changeBlur(){
+ 	Edit_Area.style.filter = "blur("+Blur.value+"px)";
+ 	return Blur.value;
+ }
+function changeGrayscale(){
+ 	Edit_Area.style.filter = "grayscale("+Grayscale.value+"%)";
+ 	return Grayscale.value;
+ }
+ function changeHue_Rotate(){
+ 	Edit_Area.style.filter = "hue-Rotate("+Hue_Rotate.value+"deg)";
+ 	return Hue_Rotate.value;
+ }
+
+ function changeInvert(){
+ 	Edit_Area.style.filter = "invert("+Invert.value+"%)";
+ 	return Invert.value;
+ }
+
+ function changeOpacity(){
+ 	Edit_Area.style.filter = "opacity("+Opacity.value+"%)";
+ 	return Opacity.value;
+ }
+
+ function changeSaturate(){
+ 	Edit_Area.style.filter = "saturate("+Saturate.value+")";
+ 	return Saturate.value;
+ }
+
+ function changeSepia(){
+ 	Edit_Area.style.filter = "sepia("+Sepia.value+"%)";
+ 	return Sepia.value;
+ }
+ function reset(){
+ 	Edit_Area.style.filter = "none";
+ }
+</script>
+
+</body>
+</html>
